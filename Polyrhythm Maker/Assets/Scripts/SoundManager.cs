@@ -14,14 +14,13 @@ public class SoundManager : MonoBehaviour {
     void Update()
     {
         //make sure we dont grab null
-        if(GameManager.instance.tempo.text != "")
+        if(GameManager.instance.tempo.text == "")
         {
-            tempo = float.Parse(GameManager.instance.tempo.text) / 60;
+            GameManager.instance.tempo.text = "120";
         }
-        else
-        {
-            tempo = 120 / 60;
-        }
+
+        tempo = float.Parse(GameManager.instance.tempo.text) / 60;
+        
         
 
         if (GameManager.instance.play && !isPlaying)
@@ -34,6 +33,7 @@ public class SoundManager : MonoBehaviour {
     public void StopAfterTempoChange()
     {
         GameManager.instance.play = false;
+        isPlaying = false;
     }
 
     IEnumerator PlayRhythm()

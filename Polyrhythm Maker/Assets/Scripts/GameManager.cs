@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour {
         //so we dont try to play something that doesnt exist
         if (gridExists)
         {
+            errorMessages.text = "";
             if (!play)
             {
                 play = true;
@@ -94,6 +95,10 @@ public class GameManager : MonoBehaviour {
             {
                 play = false;
             }          
+        }
+        else
+        {
+            errorMessages.text = "You must generate a grid first";
         }
     }
 

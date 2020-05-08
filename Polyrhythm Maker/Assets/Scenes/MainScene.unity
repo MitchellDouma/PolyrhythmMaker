@@ -1258,6 +1258,7 @@ MonoBehaviour:
   kick: {fileID: 8300000, guid: ccf8fe60aab2f644fb8e8b2c3584442d, type: 3}
   snare: {fileID: 8300000, guid: 1e0fc7507c669274d8633fca42ca5c84, type: 3}
   hat: {fileID: 8300000, guid: 16f64399f0c7946438e9eb56a084f19b, type: 3}
+  tempo: 0
 --- !u!1 &1487638389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,7 +1498,18 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474659988}
+        m_MethodName: StopAfterTempoChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+OnChangeEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
