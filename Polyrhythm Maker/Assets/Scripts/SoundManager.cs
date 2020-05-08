@@ -10,8 +10,12 @@ public class SoundManager : MonoBehaviour {
     public AudioClip hat;
     bool isPlaying;
 
+    float tempo;
+
     void Update()
     {
+        tempo = float.Parse(GameManager.instance.tempo.text) / 2;
+
         if (GameManager.instance.play && !isPlaying)
         {
             StartCoroutine(PlayRhythm());
@@ -49,9 +53,14 @@ public class SoundManager : MonoBehaviour {
 
                  
                     iterateThroughBeats++;
-                    
 
-                    yield return new WaitForSeconds(0.5f);
+                    //if the play stops, get out
+                    if (!GameManager.instance.play)
+                    {
+                        break;
+                    }
+
+                    yield return new WaitForSeconds(tempo);
                 }
             }
         }

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public InputField secondPolyInput;
     public Text errorMessages;
     public Text polyGrid;
+    public InputField tempo;
 
     bool gridExists = false;
     public int firstCurrentRhythm;
