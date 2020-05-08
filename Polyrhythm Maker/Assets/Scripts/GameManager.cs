@@ -35,22 +35,23 @@ public class GameManager : MonoBehaviour {
             {         
                 for (int j = 0; j < int.Parse(firstPolyInput.text); j++)
                 {
-                    //check if it is the first beat of the second rhythm
-                    if(iterateThroughBeats == 0)
-                    {
-                        polyGrid.text += "( " + (j + 1) + " )";
-                    }
-                    else if(iterateThroughBeats < int.Parse(secondPolyInput.text))
+                    //check if it is the first beat of the second rhythm              
+                    if(iterateThroughBeats < int.Parse(secondPolyInput.text) && iterateThroughBeats != 0)
                     {
                         polyGrid.text += "| " + (j + 1) + " |";
                         iterateThroughBeats++;
                         
                     }
                     else
-                    {                      
+                    {
                         iterateThroughBeats = 0;
                     }
-                  
+                    if (iterateThroughBeats == 0)
+                    {
+                        polyGrid.text += "( " + (j + 1) + " )";
+                        iterateThroughBeats++;
+                    }
+
                 }
                 //make a new line
                 polyGrid.text += "\n";
