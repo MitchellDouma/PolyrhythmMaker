@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour {
             //make 2d array based on input 
             firstCurrentRhythm = int.Parse(firstPolyInput.text);
             secondCurrentRhythm = int.Parse(secondPolyInput.text);
-            string[,] polyRhythm = new string[firstCurrentRhythm, secondCurrentRhythm];
             int iterateThroughBeats = 0;
             
             //create the grid

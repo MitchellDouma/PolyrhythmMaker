@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour {
     void Update()
     {
         //make sure we dont grab null
-        if(float.Parse(GameManager.instance.tempo.text) != 0)
+        if(GameManager.instance.tempo.text != "")
         {
             tempo = float.Parse(GameManager.instance.tempo.text) / 60;
         }
@@ -28,6 +28,12 @@ public class SoundManager : MonoBehaviour {
         {
             StartCoroutine(PlayRhythm());
         }
+    }
+
+    //stop the loop when the tempo changes
+    public void StopAfterTempoChange()
+    {
+        GameManager.instance.play = false;
     }
 
     IEnumerator PlayRhythm()
@@ -65,8 +71,8 @@ public class SoundManager : MonoBehaviour {
                     //if the play stops, get out
                     if (!GameManager.instance.play)
                     {
-                        break;
                         isPlaying = false;
+                        break;                      
                     }
 
                     yield return new WaitForSeconds(1 / tempo);
