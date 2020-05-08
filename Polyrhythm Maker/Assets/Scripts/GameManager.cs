@@ -28,31 +28,29 @@ public class GameManager : MonoBehaviour {
 
             //make 2d array based on input 
             string[,] polyRhythm = new string[int.Parse(firstPolyInput.text), int.Parse(secondPolyInput.text)];
-
-            //so we can highlight the first beat of the second rhythm
-            bool[] firstBeat = new bool[int.Parse(firstPolyInput.text) + int.Parse(secondPolyInput.text)];
-
-            for(int i = 0; i < firstBeat.Length; i++)
-            {
-                for(int j = 0; j < int.Parse(secondPolyInput.text); j++)
-                {
-                    if(j == 0)
-                    {
-                        firstBeat[i] = true;
-                    }
-                    else
-                    {
-                        firstBeat[i] = false;
-                    }
-                }
-            }
+            int iterateThroughBeats = 0;
             
             //create the grid
             for(int i = 0; i < int.Parse(secondPolyInput.text); i++)
             {         
                 for (int j = 0; j < int.Parse(firstPolyInput.text); j++)
                 {
-                    polyGrid.text += "| " + (j + 1) + " |";
+                    //check if it is the first beat of the second rhythm
+                    if(iterateThroughBeats == 0)
+                    {
+                        polyGrid.text += "( " + (j + 1) + " )";
+                    }
+                    else if(iterateThroughBeats < int.Parse(secondPolyInput.text))
+                    {
+                        polyGrid.text += "| " + (j + 1) + " |";
+                        iterateThroughBeats++;
+                        
+                    }
+                    else
+                    {                      
+                        iterateThroughBeats = 0;
+                    }
+                  
                 }
                 //make a new line
                 polyGrid.text += "\n";
