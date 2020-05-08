@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public InputField firstPolyInput;
     public InputField secondPolyInput;
     public Text errorMessages;
+    public Text polyGrid;
 
     public void GenerateGrid()
     {
@@ -21,9 +22,41 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
+            //clear everything
             errorMessages.text = "";
+            polyGrid.text = "";
 
+            //make 2d array based on input 
             string[,] polyRhythm = new string[int.Parse(firstPolyInput.text), int.Parse(secondPolyInput.text)];
+
+            //so we can highlight the first beat of the second rhythm
+            bool[] firstBeat = new bool[int.Parse(firstPolyInput.text) + int.Parse(secondPolyInput.text)];
+
+            for(int i = 0; i < firstBeat.Length; i++)
+            {
+                for(int j = 0; j < int.Parse(secondPolyInput.text); j++)
+                {
+                    if(j == 0)
+                    {
+                        firstBeat[i] = true;
+                    }
+                    else
+                    {
+                        firstBeat[i] = false;
+                    }
+                }
+            }
+            
+            //create the grid
+            for(int i = 0; i < int.Parse(secondPolyInput.text); i++)
+            {         
+                for (int j = 0; j < int.Parse(firstPolyInput.text); j++)
+                {
+                    polyGrid.text += "| " + (j + 1) + " |";
+                }
+                //make a new line
+                polyGrid.text += "\n";
+            }
         }
            
     }
