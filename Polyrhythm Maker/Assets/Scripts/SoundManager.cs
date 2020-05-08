@@ -9,11 +9,20 @@ public class SoundManager : MonoBehaviour {
     public AudioClip snare;
     public AudioClip hat;
     bool isPlaying;
-    float tempo;
+    public float tempo;
 
     void Update()
     {
-        tempo = float.Parse(GameManager.instance.tempo.text) / 60;
+        //make sure we dont grab null
+        if(float.Parse(GameManager.instance.tempo.text) != 0)
+        {
+            tempo = float.Parse(GameManager.instance.tempo.text) / 60;
+        }
+        else
+        {
+            tempo = 120 / 60;
+        }
+        
 
         if (GameManager.instance.play && !isPlaying)
         {
@@ -57,13 +66,13 @@ public class SoundManager : MonoBehaviour {
                     if (!GameManager.instance.play)
                     {
                         break;
+                        isPlaying = false;
                     }
 
                     yield return new WaitForSeconds(1 / tempo);
                 }
             }
-        }
-        isPlaying = false;
+        }      
     }
 
 }
