@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour {
         {
             DestroyObject(gameObject);
         }
-        
     }
 
     public void GenerateGrid()
