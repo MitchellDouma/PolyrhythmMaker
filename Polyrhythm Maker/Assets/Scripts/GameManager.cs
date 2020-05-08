@@ -7,10 +7,30 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
     //Declaration
+    public static GameManager instance = null;
+
     public InputField firstPolyInput;
     public InputField secondPolyInput;
     public Text errorMessages;
     public Text polyGrid;
+
+    bool gridExists = false;
+    public int firstCurrentRhythm;
+    public int secondCurrentRhythm;
+    public bool play;
+
+    void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else if(instance != this)
+        {
+            DestroyObject(gameObject);
+        }
+        
+    }
 
     public void GenerateGrid()
     {
@@ -22,21 +42,25 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
+            //for the benefit of playing
+            gridExists = true;
             //clear everything
             errorMessages.text = "";
             polyGrid.text = "";
 
             //make 2d array based on input 
-            string[,] polyRhythm = new string[int.Parse(firstPolyInput.text), int.Parse(secondPolyInput.text)];
+            firstCurrentRhythm = int.Parse(firstPolyInput.text);
+            secondCurrentRhythm = int.Parse(secondPolyInput.text);
+            string[,] polyRhythm = new string[firstCurrentRhythm, secondCurrentRhythm];
             int iterateThroughBeats = 0;
             
             //create the grid
-            for(int i = 0; i < int.Parse(secondPolyInput.text); i++)
+            for(int i = 0; i < secondCurrentRhythm; i++)
             {         
-                for (int j = 0; j < int.Parse(firstPolyInput.text); j++)
+                for (int j = 0; j < firstCurrentRhythm; j++)
                 {
                     //check if it is the first beat of the second rhythm              
-                    if(iterateThroughBeats < int.Parse(secondPolyInput.text) && iterateThroughBeats != 0)
+                    if(iterateThroughBeats < secondCurrentRhythm && iterateThroughBeats != 0)
                     {
                         polyGrid.text += "| " + (j + 1) + " |";
                         iterateThroughBeats++;
@@ -56,7 +80,22 @@ public class GameManager : MonoBehaviour {
                 //make a new line
                 polyGrid.text += "\n";
             }
-        }
-           
+        }          
     }
+    public void PlayPolyRhythm()
+    {
+        //so we dont try to play something that doesnt exist
+        if (gridExists)
+        {
+            if (!play)
+            {
+                play = true;
+            }
+            else
+            {
+                play = false;
+            }          
+        }
+    }
+
 }
