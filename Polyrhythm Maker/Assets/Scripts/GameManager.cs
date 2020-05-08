@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,16 +11,21 @@ public class GameManager : MonoBehaviour {
     public InputField secondPolyInput;
     public Text errorMessages;
 
-    void Start()
-    {
-
-    }
-
     public void GenerateGrid()
     {
-        if (firstPolyInput.text == "" || secondPolyInput.text == "")
+
+        try
         {
-            errorMessages.text = "Input field is empty";
+            errorMessages.text = "";
         }
+        catch(Exception e)
+        {
+            if (firstPolyInput.text == "" || secondPolyInput.text == "")
+            {
+                errorMessages.text = "Input field is empty";
+            }
+        }
+       
+
     }
 }
