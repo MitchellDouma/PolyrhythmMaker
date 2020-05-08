@@ -23,34 +23,39 @@ public class SoundManager : MonoBehaviour {
         isPlaying = true;
         int iterateThroughBeats = 0;
         //play the rhythm
-        for (int i = 0; i < GameManager.instance.secondCurrentRhythm; i++)
+        while (GameManager.instance.play)
         {
-
-            for (int j = 0; j < GameManager.instance.firstCurrentRhythm; j++)
+            for (int i = 0; i < GameManager.instance.secondCurrentRhythm; i++)
             {
-                //check if it is the first beat of the second rhythm              
-                if (iterateThroughBeats <= GameManager.instance.secondCurrentRhythm)
+                for (int j = 0; j < GameManager.instance.firstCurrentRhythm; j++)
                 {
-                    audioSource.PlayOneShot(hat);
-                }
-                
-                if (iterateThroughBeats == 0)
-                {
-                    audioSource.PlayOneShot(kick);                    
-                }
+                    //check if it is the first beat of the second rhythm    
+                    if (iterateThroughBeats == GameManager.instance.secondCurrentRhythm)
+                    {
+                        iterateThroughBeats = 0;
+                    }
+                    if (iterateThroughBeats < GameManager.instance.secondCurrentRhythm)
+                    {
+                        audioSource.PlayOneShot(hat);
+                    }
+                    if(iterateThroughBeats == 0 && j != 0)
+                    {
+                        audioSource.PlayOneShot(snare);
+                    }
+                    if (j == 0)
+                    {
+                        audioSource.PlayOneShot(kick);
+                    }
 
-                if (iterateThroughBeats == GameManager.instance.secondCurrentRhythm)
-                {
-                    iterateThroughBeats = 0;
-                }
-                else
-                {
+                 
                     iterateThroughBeats++;
+                    
+
+                    yield return new WaitForSeconds(0.5f);
                 }
-                
-                yield return new WaitForSeconds(1);
             }
         }
+        isPlaying = false;
     }
 
 }
