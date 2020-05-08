@@ -13,19 +13,18 @@ public class GameManager : MonoBehaviour {
 
     public void GenerateGrid()
     {
-
-        try
+        //look for exceptions before doing anything
+        //try catch doesn't do anything for some reason
+        if (firstPolyInput.text == "" || secondPolyInput.text == "")
+        {
+            errorMessages.text = "Input field is empty";
+        }
+        else
         {
             errorMessages.text = "";
-        }
-        catch(Exception e)
-        {
-            if (firstPolyInput.text == "" || secondPolyInput.text == "")
-            {
-                errorMessages.text = "Input field is empty";
-            }
-        }
-       
 
+            string[,] polyRhythm = new string[int.Parse(firstPolyInput.text), int.Parse(secondPolyInput.text)];
+        }
+           
     }
 }
